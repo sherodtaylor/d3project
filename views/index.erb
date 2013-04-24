@@ -7,15 +7,15 @@
     <script type="text/javascript" src="d3.js"></script>
   </head>
   <body>
+  <svg width="500" height="600">
+    <ellipse cx="255" cy="200" rx="46" ry="23"/>
+  </svg>
     <script type="text/javascript">
         d3.select("body").append("p").text("New paragraph!");
-        var dataset = [1,2,3,6,7,9];
-        d3.select("body").selectAll("p").data(dataset).enter().append("p").text(function(d){return d;}).style("color", function (d){
-          if (d < 5)
-            return "red"
-          else 
-            return "black"
-        });
+        var dataset = [14,23,33,34,45,23,56,65,54,45,12,66,77,89];
+        d3.select("body").selectAll("p").data(dataset).enter().append("div").attr("class","bar").style("height", function (d){
+                              return (d * 5) + "px"
+                            });
     </script>
   </body>
 </html>     
