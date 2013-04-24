@@ -7,22 +7,37 @@
     <script type="text/javascript" src="d3.js"></script>
   </head>
   <body>
-  <%# <svg width="500" height="600"> %>
-  <%#   <ellipse cx="255" cy="200" rx="46" ry="23"/> %>
-  <%# </svg> %>
     <script type="text/javascript">
-        <%# d3.select("body").append("p").text("New paragraph!"); %>
-        var w = 600;
-        var h = 500;
-        var barPadding = 4;
-        var dataset = [14,23,33,34,45,23,56,65,54,45,12,66,77,89];
-        var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
-        svg.selectAll("rect").data(dataset).enter().append("rect").attr("x", function (d,i){
-          return i * ( w / dataset.length);
-        }).attr("y",function (d){ return h - d; }).attr("width", w / dataset.length - barPadding).attr("height", function (d) {
-          return d;
-        }).attr("fill", "teal");
+        var w = 600; // setting width
+        var h = 100; // setting height
+        var dataset =   [[ 5,    20 ],
+                         [ 480,  90 ],
+                         [ 250,  50 ],
+                         [ 100,  33 ],
+                         [ 330,  95 ],
+                         [ 410,  12 ],
+                         [ 475,  44 ],
+                         [ 25,   67 ],
+                         [ 85,   21 ],
+                         [ 220,  88 ]];
 
+         // create svg layout for scatterplot
+        var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+        // create circle svg object
+       var circle = svg.selectAll("circle").data(dataset).enter().append("circle");
+        // create text object
+       var text = svg.selectAll('text').data(dataset).enter().append("text");
+       // coordinates text
+       text.text(function (d){ return d[0] + ", " + d[1];}) // text
+       .attr("x", function (d){ return d[0]; }) // map text to x coordinate
+       .attr("y", function (d){ return d[1]; }); // map text to y coordinate
+
+       // setting circle svg object attributes
+
+       circle.attr("cx", function (d){ return d[0]; })
+       .attr("cy",function (d){ return d[1]; })
+       .attr("r", function (d){ return Math.sqrt(h - d[1]);})
+       .attr("opacity", "0.80");
     </script>
   </body>
 </html>     
